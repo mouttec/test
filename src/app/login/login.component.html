@@ -1,0 +1,13 @@
+<div class="col-8 m-auto">
+  <form [formGroup]="signinForm" class="d-flex flex-column" (ngSubmit)="onSubmit()">
+    <div class="form-group w-100">
+      <label for="usernamePartner">Username</label>
+      <input type="usernamePartner" name="usernamePartner" class="form-control" autocomplete="off" placeholder="" formControlName="usernamePartner">
+  </div>
+  <div class="form-group w-100">
+      <label for="Password">Votre mot de passe</label>
+      <input type="password" class="form-control" name="Password" placeholder="" autocomplete="off" formControlName="password">
+  </div>
+  <button type="submit" [disabled]="signinForm.invalid" class="btn btn-primary text-center mt-2 buttonSearchGarage w-100">Connexion</button>
+  </form>
+</div>

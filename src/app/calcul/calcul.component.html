@@ -1,0 +1,195 @@
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmitFormBooking()">
+ <div class="row">
+  <div class="col-6">
+    <h3 class="text-center mb-4">Choix de la formule</h3>
+  </div>
+</div>
+<div class="row d-flex">
+  <div class="mb-3 col-6">
+    <div class="row input-field d-flex flex-row mb-2">
+      <div class="input-field d-flex mt-radio flex-colunm col-7">
+              <p class="d-flex flex-row">
+                <input name="formulaBooking" type="radio" value="simple" class="validate m-auto" id="simple" formControlName="formulaBooking" (change)="changeFormulaBooking($event)">
+                <label for="formulaBooking">Trajet simple</label>
+              </p>
+      </div>
+      <div class="input-field d-flex mt-radio flex-colunm col-5">
+              <p class="d-flex flex-row">
+                <input name="formulaBooking" type="radio" value="round" class="validate m-auto" id="round" formControlName="formulaBooking" (change)="changeFormulaBooking($event)">
+                <label for="formulaBooking">Aller/Retour</label>
+              </p>
+      </div>
+    </div>
+    <div class="row input-field d-flex flex-row mb-2" *ngIf="this.bookingForm.value.formulaBooking === 'simple' || this.bookingForm.value.formulaBooking === 'forth' || this.bookingForm.value.formulaBooking === 'back' ">
+      <div class="input-field d-flex mt-radio flex-colunm">
+        <label class="col-4 mr-0" for="formulaBooking">Type de trajet</label>
+        <select class="validate col-8" id="formulaBooking" formControlName="formulaBooking" required>
+          <option value="Selectionnez un type de trajet" disabled selected>Sélectionnez un type de trajet</option>
+          <option value="forth" (change)="changeFormulaBooking($event)">Prise en charge</option>
+          <option value="back" (change)="changeFormulaBooking($event)">Restitution</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 col-6" [ngClass]="{'d-none': this.bookingForm.value.formulaBooking != 'forth' && this.bookingForm.value.formulaBooking != 'back'}">
+    <div class="input-field d-flex flex-row mb-70">
+      <div class="input-field col-12">
+        <div class="label" [ngClass]="{'d-none': this.bookingForm.value.formulaBooking != 'forth'}">
+          <label for="address" >Adresse de prise en charge</label>
+        </div>
+        <div class="label" [ngClass]="{'d-none': this.bookingForm.value.formulaBooking != 'back'}">
+          <label for="address" >Adresse de restitution</label>
+        </div>
+        <input type="text" class="validate" id="address" formControlName="address">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="mb-3 col-6" [ngClass]="{'d-none': this.bookingForm.value.formulaBooking != 'back'}">
+    <div class="input-field d-flex flex-row mb">
+      <div class="input-field col-12">
+        <label for="address">Adresse de restitution</label>
+        <input type="text" class="validate" id="address" formControlName="address">
+         <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="mb-3 col-6" [ngClass]="{'d-none': this.bookingForm.value.formulaBooking != 'round'}">
+    <div class="input-field d-flex flex-row mb-70">
+      <div class="input-field col-12">
+        <label for="addressForth">Adresse de prise en charge</label>
+        <input type="text" class="validate" id="addressForth1" formControlName="addressForth">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+    </div>
+    <div class="input-field d-flex flex-row mb">
+      <div class="input-field col-12">
+        <label for="addressBack">Adresse de restitution</label>
+        <input type="text" class="validate" id="addressBack1" formControlName="addressBack">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row d-flex mb-5">
+  <div class="input-field text-center m-auto">
+    <button class="m-auto size" id="btn" (click)="getDist()">Tarif</button>
+  </div>
+</div>
+<h2>Le tarif est  <span>
+  <strong>{{tarif}}</strong>
+ </span>
+</h2>
+
+<div class="row d-flex">
+  <div class="col-6 colInfoLeft">
+    <h3 class="text-center mb-4">Information client</h3>
+    <div class="input-field d-flex flex-row mb">
+      <div class="input-field col-6">
+        <label for="firstNameCustomer">Nom du client</label>
+        <input required type="text" class="validate" id="firstNameCustomer" formControlName="firstNameCustomer">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+      <div class="input-field col-6">
+        <label for="lastNameCustomer">Prénom du client</label>
+        <input required type="text" class="validate" id="lastNameCustomer" formControlName="lastNameCustomer">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+    </div>
+    <div class="input-field d-flex flex-row mb">
+      <div class="input-field col-6">
+        <label for="phoneCustomer">Téléphone du client</label>
+        <input required type="text" class="validate" id="phoneCustomer" formControlName="phoneCustomer">
+        <!-- <div class="messageError">
+          <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+      <div class="input-field col-6">
+        <label for="mailCustomer">E-mail</label>
+        <input type="text" class="validate" id="mailCustomer" formControlName="mailCustomer">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+    </div>
+    <div class="input-field d-flex flex-row mb">
+      <div class="input-field col-12">
+        <label for="dateOfBirthdayCustomer">Date de naissance du client</label>
+        <input type="date" class="validate" id="dateOfBirthdayCustomer" formControlName="dateOfBirthdayCustomer">
+        <!-- <div class="messageError">
+            <sup>*</sup>Champ obligatoire
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <h3 class="text-center mb-4 mt-4">Information véhicule</h3>
+  <div class="input-field d-flex flex-row mb">
+    <div class="input-field col-12">
+      <label for="licensePlateCar">Plaque d'immatriculation</label>
+      <input required type="text" class="validate" id="licensePlateCar" formControlName="licensePlateCar">
+      <!-- <div class="messageError">
+        <sup>*</sup>Champ obligatoire
+      </div> -->
+    </div>
+  </div>
+  <div class="mt-5 mb-5 text-center">
+    <button class="m-auto size" id="btn" (click)="getCar()">Valider la plaque</button>
+  </div>
+  <div class="input-field d-flex flex-row mb">
+    <div class="input-field col-6">
+      <label for="brandCar">Marque du véhicule</label>
+      <input required type="text" class="validate" id="brandCar" formControlName="brandCar">
+      <!-- <div class="messageError">
+        <sup>*</sup>Champ obligatoire
+      </div> -->
+    </div>
+    <div class="input-field col-6">
+      <label for="modelCar">Modèle du véhicule</label>
+      <input required type="text" class="validate" id="modelCar" formControlName="modelCar">
+      <!-- <div class="messageError">
+          <sup>*</sup>Champ obligatoire
+      </div> -->
+    </div>
+  </div>
+  <div class="input-field d-flex flex-row mb">
+    <div class="input-field col-6">
+      <label for="motorizationCar">Motorisation du <br>véhicule</label>
+      <input required type="text" class="validate" id="motorizationCar" formControlName="motorizationCar">
+      <!-- <div class="messageError">
+        <sup>*</sup>Champ obligatoire
+      </div> -->
+    </div>
+    <div class="input-field col-6">
+      <label for="dateOfCirculationCar">Date de première mise en circulation</label>
+      <input required type="date" class="validate" id="dateOfCirculationCar" formControlName="dateOfCirculationCar">
+      <!-- <div class="messageError">
+          <sup>*</sup>Champ obligatoire
+      </div> -->
+    </div>
+  </div>
+
+  <div class="mt-5 mb-5 text-center">
+    <button class="m-auto size" id="btn" >Valider le véhicule</button>
+  </div>
+
+</div>
+<div class="row d-flex mb-5">
+  <div class="input-field text-center m-auto">
+    <button class="m-auto size" id="btn" type="submit">Valider</button>
+  </div>
+</div>
+
+</form>
+
