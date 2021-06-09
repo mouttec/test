@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <p style="background-color: red;">{{ date }}</p>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-2" *ngFor="let date of date | slice:0:20">
+      <p style="background-color: blue;"[ngClass]="{'d-none': this.date === '2021-06-06'}">{{ date }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row d-flex flex-column" *ngFor="let hours of hours | slice:0:12">
+    <div class="col-2" >
+      <p style="background-color: yellow;">{{ hours }}</p>
+    </div>
+    <div class="col-2 offset-2 d-flex flex-column" *ngFor="let hours of hours | slice:13:20">
+      <p style="background-color: yellow;">{{ hours }}</p>
+    </div>
+  </div>
+</div>

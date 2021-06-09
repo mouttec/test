@@ -1,3 +1,4 @@
+import { BookingCalendarComponent } from './booking-calendar/booking-calendar.component';
 import { CalculComponent } from './calcul/calcul.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,9 +21,10 @@ const routes: Routes = [
   // { path: '**', redirectTo: ''}
 
   { path: 'admin', component: AdminComponent },
-  {path: 'auth', component: AuthComponent},
-  {path: 'auth/signin', component: SinginComponent},
-  {path: 'auth/signup', component: SingupComponent},
+  { path: 'auth', component: AuthComponent},
+  { path: 'auth/signin', component: SinginComponent},
+  { path: 'auth/signup', component: SingupComponent},
+  { path: 'bookingCalendar', component: BookingCalendarComponent },
   { path: 'calcul', component: CalculComponent }
 ];
 

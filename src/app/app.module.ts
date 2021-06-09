@@ -23,6 +23,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthComponent } from './auth/auth.component';
 import { SinginComponent } from './auth/singin/singin.component';
 import { SingupComponent } from './auth/singup/singup.component';
+import { BookingCalendarComponent } from './booking-calendar/booking-calendar.component';
 
 registerLocaleData(localeFr);
 
@@ -41,6 +42,7 @@ registerLocaleData(localeFr);
     AuthComponent,
     SinginComponent,
     SingupComponent,
+    BookingCalendarComponent,
   ],
   imports: [
     BrowserModule,
